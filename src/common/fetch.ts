@@ -3,6 +3,7 @@ import { iClima, iLocation } from "./interfaces";
 const urlIpInfo = "http://ip-api.com/json/";
 const urlApiBack = "http://localhost:5000/v1/";
 const currentPath = "current/";
+export const urlIcon = "http://openweathermap.org/img/wn/";
 
 export const getLocation = async () => {
     let location: {

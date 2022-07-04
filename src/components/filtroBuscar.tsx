@@ -4,7 +4,7 @@ import { iClima } from "../common/interfaces";
 import ClimaActual from "./climaActual";
 
 const FiltroBuscar = () => {
-    const [city, setCity] = useState<string>("");
+    const [city, setCity] = useState<string | undefined>("");
     const [inputCity, setInputCity] = useState<string>("");
     const [climaActual, setClimaActual] = useState<iClima>();
 
@@ -26,6 +26,7 @@ const FiltroBuscar = () => {
 
     const handleSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault();
+        setClimaActual(undefined);
         setCity(inputCity);
     };
 
@@ -52,18 +53,16 @@ const FiltroBuscar = () => {
                     </div>
                 </div>
             </form>
-
-            {climaActual && (
-                <div
-                    style={{
-                        backgroundColor: "white",
-                        minHeight: "200px",
-                        borderRadius: "3px"
-                    }}
-                >
-                    <ClimaActual data={climaActual} />
-                </div>
-            )}
+            <div
+                className="row mt-3 ml-3"
+                style={{
+                    backgroundColor: "white",
+                    minHeight: "200px",
+                    borderRadius: "3px"
+                }}
+            >
+                {climaActual && <ClimaActual data={climaActual} />}
+            </div>
         </div>
     );
 };
