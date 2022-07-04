@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { getCurrentWeater, getLocation } from "../common/fetch";
 import { iClima } from "../common/interfaces";
 import ClimaActual from "./climaActual";
+import Spin from "./spin";
 
 const FiltroBuscar = () => {
+    const [cargando, setCargando] = useState(false);
     const [city, setCity] = useState<string | undefined>("");
     const [inputCity, setInputCity] = useState<string>("");
     const [climaActual, setClimaActual] = useState<iClima>();
 
     useEffect(() => {
+        setCargando(true);
         getLocation().then((location) => {
             if (location && location.data) {
                 const { data } = location;
@@ -17,6 +20,7 @@ const FiltroBuscar = () => {
                     clima && clima.data && setClimaActual(clima.data);
                 });
             }
+            setCargando(false);
         });
     }, []);
 
@@ -61,7 +65,19 @@ const FiltroBuscar = () => {
                     borderRadius: "3px"
                 }}
             >
-                {climaActual && <ClimaActual data={climaActual} />}
+                {cargando === true && (
+                    <div className="mt-3">
+                        <Spin />
+                    </div>
+                )}
+                {cargando === false && climaActual && (
+                    <ClimaActual data={climaActual} />
+                )}
+                {/*city && (
+                    <div className="mt-3">
+                        <Card></Card>
+                    </div>
+                )*/}
             </div>
         </div>
     );
