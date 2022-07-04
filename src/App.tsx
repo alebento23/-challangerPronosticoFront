@@ -6,7 +6,11 @@ function App() {
     return (
         <div
             className="App"
-            style={{ backgroundColor: "#70afe1", minHeight: "800px" }}
+            style={{
+                background:
+                    "linear-gradient(to right bottom, rgb(182 203 241) 20%, rgb(58 66 104) 93%)",
+                minHeight: "800px"
+            }}
         >
             <Principal></Principal>
         </div>
