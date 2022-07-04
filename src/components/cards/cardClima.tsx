@@ -8,7 +8,6 @@ interface Props {
 
 const CardClima = (props: Props) => {
     const { clima } = props;
-    console.log(clima);
     let urlIcono = `${urlIcon}${clima.weather[0].icon}.png`;
 
     return (
@@ -27,14 +26,14 @@ const CardClima = (props: Props) => {
                             <h5 className="card-title">
                                 {clima.weather[0].description}
                             </h5>
-                            <p className="card-text">
+                            <div className="card-text">
                                 Temperatura
-                                <div className="ms-3">
+                                <p className="ms-3">
                                     Actual: {clima.main.temp + `°`} <br />
                                     Max.: {clima.main.temp_max + `°`} <br />
                                     Min.: {clima.main.temp_min + `°`} <br />
-                                </div>
-                            </p>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
