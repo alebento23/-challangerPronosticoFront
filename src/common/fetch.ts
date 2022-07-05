@@ -1,8 +1,9 @@
-import { iClima, iLocation } from "./interfaces";
+import { iClima, iLocation, iPronostico } from "./interfaces";
 
 const urlIpInfo = "http://ip-api.com/json/";
 const urlApiBack = "http://localhost:5000/v1/";
 const currentPath = "current/";
+const forecastPath = "forecast/";
 export const urlIcon = "http://openweathermap.org/img/wn/";
 
 export const getLocation = async () => {
@@ -40,7 +41,7 @@ export const getCurrentWeater = async (city: string) => {
         data?: iClima;
     } = {
         code: 404,
-        message: "Error de Ubicacion"
+        message: "Error de Ciudad"
     };
     try {
         let infoWeater = await fetch(`${url}${city}`);
@@ -54,8 +55,36 @@ export const getCurrentWeater = async (city: string) => {
         console.log("clima actual", error);
         location = {
             code: 404,
-            message: "Error Clima actual"
+            message: "Error de Ciudad"
         };
         return location;
+    }
+};
+
+export const getForecast = async (city: string) => {
+    let url = `${urlApiBack}${forecastPath}`;
+    let result: {
+        code: number;
+        message: string;
+        data?: iPronostico;
+    } = {
+        code: 404,
+        message: "Error de Ciudad"
+    };
+    try {
+        let infoWeater = await fetch(`${url}${city}`);
+        let data = (await infoWeater.json()) as iPronostico;
+        return {
+            code: 200,
+            message: "Pronostico",
+            data: data
+        };
+    } catch (error) {
+        console.log("Pronostico", error);
+        result = {
+            code: 404,
+            message: "Error de Ciudad"
+        };
+        return result;
     }
 };
