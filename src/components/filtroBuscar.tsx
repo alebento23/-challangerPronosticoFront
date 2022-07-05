@@ -68,18 +68,32 @@ const FiltroBuscar = () => {
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col-md-3">
-                        <input
-                            className="form-control"
-                            type={"text"}
-                            value={inputCity}
-                            onChange={(e) => setInputCity(e.target.value)}
-                        ></input>
+                        <div className="row">
+                            <div className="col-md-5 mt-1">
+                                <p className="text-muted">Ingresar ciudad:</p>
+                            </div>
+                            <div className="col-md-7">
+                                <input
+                                    className="form-control"
+                                    type={"text"}
+                                    value={inputCity}
+                                    onChange={(e) =>
+                                        setInputCity(e.target.value)
+                                    }
+                                ></input>
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-md-2 text-start">
                         <button type="submit" className="btn btn-primary">
                             Buscar
                         </button>
                     </div>
+                </div>
+                <div>
+                    <p className="font-monospace text-start">
+                        Presione Buscar para cargar el pronóstico extendido
+                    </p>
                 </div>
             </form>
             {status && status?.code === 200 && (
