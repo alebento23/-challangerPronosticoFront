@@ -42,19 +42,21 @@ const FiltroBuscar = () => {
         setCargando(true);
 
         city &&
-            getForecast(city).then((pronostico) => {
-                if (pronostico && pronostico.data) {
-                    setStatus({ code: 200, message: "" });
-                    setPronostico(pronostico.data);
-                }
+            (city.length > 0
+                ? getForecast(city).then((pronostico) => {
+                      if (pronostico && pronostico.data) {
+                          setStatus({ code: 200, message: "" });
+                          setPronostico(pronostico.data);
+                      }
 
-                if (pronostico.code === 404) {
-                    setStatus(pronostico);
-                    setPronostico(undefined);
-                }
+                      if (pronostico.code === 404) {
+                          setStatus(pronostico);
+                          setPronostico(undefined);
+                      }
 
-                setCargando(false);
-            });
+                      setCargando(false);
+                  })
+                : setStatus({ code: 404, message: "Ingrese ciudad" }));
     }, [city]);
 
     const handleSubmit = (event: { preventDefault: () => void }) => {
@@ -75,12 +77,22 @@ const FiltroBuscar = () => {
                             <div className="col-md-7">
                                 <input
                                     className="form-control"
-                                    type={"text"}
+                                    list="Opciones"
                                     value={inputCity}
                                     onChange={(e) =>
                                         setInputCity(e.target.value)
                                     }
-                                ></input>
+                                    id="dataList"
+                                    placeholder="Ciudad..."
+                                    required={true}
+                                />
+                                <datalist id="Opciones">
+                                    <option value="Paraná" />
+                                    <option value="Victoria" />
+                                    <option value="Federal" />
+                                    <option value="Crespo" />
+                                    <option value="Bovril" />
+                                </datalist>
                             </div>
                         </div>
                     </div>
