@@ -88,7 +88,7 @@ const FiltroBuscar = () => {
                                 />
                                 <datalist id="Opciones">
                                     <option value="Paraná" />
-                                    <option value="Victoria" />
+                                    <option value="Buenos Aires" />
                                     <option value="Federal" />
                                     <option value="Crespo" />
                                     <option value="Bovril" />
